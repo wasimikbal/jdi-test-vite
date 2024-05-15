@@ -1,41 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/style.css">
-    <title>Document</title>
     <script type="module" src="./src/app.js"></script>
+    <title>Document</title>
 </head>
+
 <body>
-
-    <div class="carousel-container">
-        <img src="../images/back.png" id="backbtn"/>
-
-        <div class="scroll-content">
-
-            <div class="scroll-items-list">
-
-                <div class="scroll-item">
-                    <img src="../images/image-2.png"></img>
-                </div>
     
-                <div class="scroll-item">
-                    <img src="../images/image-2.png"></img>
-                </div>
-    
-                <div class="scroll-item">
-                    <img src="../images/image-2.png"></img>
-                </div>
-    
-                <div class="scroll-item">
-                    <img src="../images/image-2.png"></img>
-                </div>
-            </div>
-            
-            
+    <div class="wrapper">
+        <div class="carousel">
+            <canvas class="item-container" id="canvas1"></canvas>
+            <canvas class="item-container" id="canvas2"></canvas>
+            <canvas class="item-container" id="canvas3"></canvas>
+            <canvas class="item-container" id="canvas4"></canvas>
         </div>
-        <img src="../images/next.png" id="nextbtn"/>
+    </div>
+    
+    <!-- <div>
+        <canvas class="webgl" id="canvas1"></canvas>
+    </div> -->
 
 </body>
+
 </html>
