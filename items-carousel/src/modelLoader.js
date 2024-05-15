@@ -36,4 +36,12 @@ export const loadModel = (container, modelPath) => {
     const renderer = new THREE.WebGLRenderer({ canvas: canvas })
     renderer.setSize(300, 300);
     renderer.render(scene, camera);
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+  }
+  
+  animate();
+
 }
