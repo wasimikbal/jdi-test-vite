@@ -1,34 +1,50 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
 export const loadModel = (container, modelPath) => {
+
+  let distance = null;
+  let center = null;
+
+  //Fetching the canvas from html
+  const canvas = document.getElementById(container)
+  console.log(canvas)
+
+  //Init scene
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('lightblue');
+
+  //Loading the model
+  const loader = new GLTFLoader();
+  loader.load(modelPath, (gltf) => {
+    const model = gltf.scene;
+    model.position.set(0, 0, 0);
+    model.rotation.set(0, 0.5, 0)
+    model.scale.set(5, 5, 5)
+    console.log(model.position)
+
+    // Get the bounding box of the model and calculate its size, calculate the distance based on average length.
+    const box = new THREE.Box3().setFromObject(model);
+    const boxSize = new THREE.Vector3();
+    box.getSize(boxSize);
+    distance = (boxSize.x + boxSize.y + boxSize.z) / 3
     
-    //Fetching the canvas from html
-    const canvas = document.getElementById(container)
-    console.log(canvas)
+    // Get the center of the bounding box for camera to look at.
+    const boxCOG = new THREE.Vector3();
+    box.getCenter(boxCOG);
 
-    //Init scene
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color('lightblue');
+    scene.add(model);
+    console.log(model)
 
-    //Loading the model
-    const loader = new GLTFLoader();
-    loader.load(modelPath, (gltf) => {
-      const model = gltf.scene;
-      model.position.set(0, 0, 0);
-      model.rotation.set(0,0.5,0)
-      scene.add(model);
-      console.log(model)
-    });
-
-    //Init camera
+    //Init Camera, set the camera distance from the object as per object size.
     const camera = new THREE.PerspectiveCamera(75, 300 / 300);
-    camera.position.z = 5;
+    camera.position.z = distance;
+    camera.lookAt(boxCOG);
     scene.add(camera);
 
     //Add Light source
-    const light = new THREE.DirectionalLight(0xfdfbd3, 1);
+    const light = new THREE.AmbientLight(0xfdfbd3, 2);
     light.position.y = 10;
     scene.add(light);
 
@@ -40,8 +56,15 @@ export const loadModel = (container, modelPath) => {
     const animate = () => {
       requestAnimationFrame(animate);
       renderer.render(scene, camera);
-  }
-  
-  animate();
+    }
+
+    animate();
+  });
+
+
+
+
+
+
 
 }
