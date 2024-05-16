@@ -8,7 +8,6 @@ export const loadModel = (container, modelPath) => {
 
   //Fetching the canvas from html
   const canvas = document.getElementById(container)
-  console.log(canvas)
 
   //Init scene
   const scene = new THREE.Scene();
@@ -21,7 +20,6 @@ export const loadModel = (container, modelPath) => {
     model.position.set(0, 0, 0);
     model.rotation.set(0, 0.5, 0)
     model.scale.set(5, 5, 5)
-    console.log(model.position)
 
     // Get the bounding box of the model and calculate its size, calculate the distance based on average length.
     const box = new THREE.Box3().setFromObject(model);
@@ -34,7 +32,6 @@ export const loadModel = (container, modelPath) => {
     box.getCenter(boxCOG);
 
     scene.add(model);
-    console.log(model)
 
     //Init Camera, set the camera distance from the object as per object size.
     const camera = new THREE.PerspectiveCamera(75, 300 / 300);

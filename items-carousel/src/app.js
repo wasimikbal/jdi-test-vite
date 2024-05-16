@@ -2,6 +2,12 @@ import * as THREE from 'three'
 import { loadModel } from './modelLoader'
 import { items } from './getItems'
 import { nextBtn, backBtn, scrollContainer } from './views'
+import { setupPopup } from './setupPopup'
+
+
+const showPopupBtn = document.getElementById('show');
+const hidePopupBtn = document.getElementById('hide');
+const popup = document.getElementById('popup');
 
 
 const itemWidth = 300
@@ -17,6 +23,7 @@ nextBtn.addEventListener('click', () => {
     scrollContainer.scrollLeft += itemWidth + padding
 })
 
-items.forEach((item)=>{
+items.forEach((item) => {
     loadModel(item.conatinerID, item.path)
+    setupPopup(item)
 })
