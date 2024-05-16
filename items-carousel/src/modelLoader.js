@@ -45,12 +45,13 @@ export const loadModel = (container, modelPath) => {
     scene.add(light);
 
     // init renderer
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas })
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true })
     renderer.setSize(300, 300);
     renderer.render(scene, camera);
 
     const animate = () => {
       requestAnimationFrame(animate);
+      model.rotation.y += 0.005;
       renderer.render(scene, camera);
     }
 

@@ -27,3 +27,13 @@ items.forEach((item) => {
     loadModel(item.conatinerID, item.path)
     setupPopup(item)
 })
+
+// const scene = null;
+// const camera = null;
+// const renderer = null;
+
+// const animate = () => {
+//     renderer.render(scene, camera);
+// }
+
+// animate
